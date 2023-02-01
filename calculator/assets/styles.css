@@ -1,7 +1,7 @@
 #app{
     display: grid;
-    grid-template-columns: 1fr 5fr 1fr;
-    grid-template-rows: 1fr 1fr 5fr 1fr;
+    grid-template-columns: minmax(auto, 500px) 5fr minmax(auto, 500px);
+    grid-template-rows: minmax(50px, auto) minmax(100px, auto) minmax(500px, auto) auto;
     grid-row-gap: 10px;
     grid-column-gap: 10px;
     
@@ -14,9 +14,20 @@
     grid-row: 0/1;
 }
 
-.input{
+
+
+#calculator{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 5fr;
+    grid-row-gap: 10px;
+    grid-column-gap: 10px;
     grid-column: 2/3;
-    grid-row: 2/3;
+    grid-row: 3/4;
+}
+
+#input{
+    grid-row: 1/2;
    
 }
 
@@ -25,14 +36,11 @@
     height: 100%;
     font-size: 30px;
     text-align: center;
-
 }
 
 
-
 .buttons{
-    grid-column: 2/3;
-    grid-row: 3/4;
+    
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, 1fr);
@@ -84,4 +92,16 @@
 #button0{
     grid-column: 2/3;
 
+}
+
+#logDiv{
+    grid-column: 2/3;
+    grid-row: 4/5;
+    font-size: 50px;
+}
+
+#logList{
+    text-align: center;
+    margin: auto;
+    list-style: none;
 }
