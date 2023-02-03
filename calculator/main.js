@@ -84,9 +84,14 @@ const app = Vue.createApp({
         },
 
         addToLog(){
-          const li = document.createElement("li");
-          li.textContent = this.num1 + " " + this.operator + " " + this.num2 + " = " + this.result;
-          document.getElementById("logList").appendChild(li);
+          if (/[^0-9.]/.test(this.inputValue.toString())) {
+            this.inputValue = this.inputValue.toString().slice(0, -1);
+          }else{
+            const li = document.createElement("li");
+            li.textContent = this.num1 + " " + this.operator + " " + this.num2 + " = " + this.result;
+            document.getElementById("logList").appendChild(li);
+          }
+          
         }
     }
   });
