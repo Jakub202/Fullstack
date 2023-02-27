@@ -12,40 +12,42 @@
 
   <div id="app">
 
-    <div class="text">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id itaque dolorum ducimus, ut vitae fugiat porro totam delectus animi obcaecati molestiae possimus, exercitationem ullam consectetur? Accusantium cum eligendi fugiat provident sequi pariatur, fugit dolorem saepe blanditiis hic, exercitationem commodi unde animi porro corporis deserunt a! Veniam vel quo inventore accusamus expedita quis ab in nostrum impedit exercitationem debitis ipsa fugit, voluptas modi dolore saepe molestias atque corrupti sapiente quos at odio. Quia consequuntur fugiat sunt aperiam officiis nam alias sequi, officia impedit ratione? Quibusdam voluptatem quas odit unde, totam perspiciatis, impedit earum, consequatur cumque aut officiis. Aspernatur eius sit eligendi.</p>
-
-    <button id="button1">click me!</button>
-
-    </div>
-
-    <div class="input">
-      <input type="text" id="inputBox" placeholder="enter number" v-model="inputValue" size="30">
-    </div>
     
 
-    <div class="buttons">
-        
-        <button class="operator" id="buttonAC" @click="clearAll()">AC</button>
-        <button class="operator" id="buttonAns" @click="getAnswer()">Ans</button>
-        <button class="operator" id="buttonDel" @click="deleteLastDigit()">Del</button>
-        <button class="operator" id="buttonDiv" @click="setOperator('/')">/</button>
-        <button class="operator" id="buttonMulti" @click="setOperator('*')">*</button>
-        <button class="operator" id="buttonAdd" @click="setOperator('+')">+</button>
-        <button class="operator" id="buttonDiff" @click="setOperator('-')">-</button>
-        <button class="number" id="button1" @click="method3(1)">1</button>
-        <button class="number" id="button2" @click="method3(2)">2</button>
-        <button class="number" id="button3" @click="method3(3)">3</button>
-        <button class="number" id="button4" @click="method3(4)">4</button>
-        <button class="number" id="button5" @click="method3(5)">5</button>
-        <button class="number" id="button6" @click="method3(6)">6</button>
-        <button class="number" id="button7" @click="method3(7)">7</button>
-        <button class="number" id="button8" @click="method3(8)">8</button>
-        <button class="number" id="button9" @click="method3(9)">9</button>
-        <button class="number" id="button0" @click="method3(0)">0</button>
-        <button class="number" id="buttonComma" @click="method3('.')">.</button>
-        <button class="operator" id="=" @click="calculate()">=</button>
+    <div id="calculator">
+      <div id="input">
+        <input type="text" id="inputBox" placeholder="enter number" v-model="inputValue" size="30">
+      </div>
+      
+  
+      <div class="buttons">
+        <button id="buttonAC" @click="clearAll()">AC</button>
+        <button id="buttonAns" @click="getAnswer()">Ans</button>
+        <button id="buttonDel" @click="deleteLastDigit()">Del</button>
+        <button id="buttonDiv" @click="setOperator('/')">/</button>
+        <button id="buttonMulti" @click="setOperator('*')">*</button>
+        <button id="buttonAdd" @click="setOperator('+')">+</button>
+        <button id="buttonDiff" @click="setOperator('-')">-</button>
+        <button id="button1" @click="method3(1)">1</button>
+        <button id="button2" @click="method3(2)">2</button>
+        <button id="button3" @click="method3(3)">3</button>
+        <button id="button4" @click="method3(4)">4</button>
+        <button id="button5" @click="method3(5)">5</button>
+        <button id="button6" @click="method3(6)">6</button>
+        <button id="button7" @click="method3(7)">7</button>
+        <button id="button8" @click="method3(8)">8</button>
+        <button id="button9" @click="method3(9)">9</button>
+        <button id="button0" @click="method3(0)">0</button>
+        <button id="buttonComma" @click="method3('.')">.</button>
+        <button id="=" @click="calculate()">=</button>
+    </div>
+  </div>
+    
 
+
+    <div id="logDiv">
+      <ul id="logList">
+      </ul>
     </div>
 
   </div>

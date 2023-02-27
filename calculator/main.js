@@ -39,7 +39,6 @@ const app = Vue.createApp({
               this.inputValue = this.num1 / this.num2;
               this.result = this.num1 / this.num2;
             }
-            
           }else if(this.operator === "*"){
             this.inputValue = this.num1 * this.num2;
             this.result = this.num1 * this.num2;
@@ -50,6 +49,8 @@ const app = Vue.createApp({
             this.result = this.num1 - this.num2;
             this.inputValue = this.result;
           }
+
+          this.addToLog();
           
         },
 
@@ -78,6 +79,17 @@ const app = Vue.createApp({
         getAnswer(){
           if(this.result !== ""){
             this.inputValue = this.result.toString();
+          }
+          
+        },
+
+        addToLog(){
+          if (/[^0-9.]/.test(this.inputValue.toString())) {
+            this.inputValue = this.inputValue.toString().slice(0, -1);
+          }else{
+            const li = document.createElement("li");
+            li.textContent = this.num1 + " " + this.operator + " " + this.num2 + " = " + this.result;
+            document.getElementById("logList").appendChild(li);
           }
           
         }
