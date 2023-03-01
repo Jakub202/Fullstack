@@ -11,10 +11,10 @@
         <button class="operator" id="buttonAC" @click="clearAll()">AC</button>
         <button class="operator" id="buttonAns" @click="getAnswer()">Ans</button>
         <button class="operator" id="buttonDel" @click="deleteLastDigit()">Del</button>
-        <button class="operator" id="buttonDiv" @click="setOperator('/')">/</button>
-        <button class="operator" id="buttonMulti" @click="setOperator('*')">*</button>
-        <button class="operator" id="buttonAdd" @click="setOperator('+')">+</button>
-        <button class="operator" id="buttonDiff" @click="setOperator('-')">-</button>
+        <button class="operator" id="buttonDiv" @click="setOperator('divide')">/</button>
+        <button class="operator" id="buttonMulti" @click="setOperator('multiply')">*</button>
+        <button class="operator" id="buttonAdd" @click="setOperator('add')">+</button>
+        <button class="operator" id="buttonDiff" @click="setOperator('subtract')">-</button>
         <button class="number" id="button1" @click="addNumber(1)">1</button>
         <button class="number" id="button2" @click="addNumber(2)">2</button>
         <button class="number" id="button3" @click="addNumber(3)">3</button>
@@ -26,7 +26,7 @@
         <button class="number" id="button9" @click="addNumber(9)">9</button>
         <button class="number" id="button0" @click="addNumber(0)">0</button>
         <button class="number" id="buttonComma" @click="addNumber('.')">.</button>
-        <button class="operator" id="buttonEquals" @click="calculate()">=</button>
+        <button class="operator" id="buttonEquals" @click="calculateAPI()">=</button>
 
     </div>
 </div>
@@ -35,6 +35,7 @@
 
 <script>
 import { mapActions } from 'vuex';
+import axios from 'axios';
     export default{
         
     data() {
@@ -44,6 +45,8 @@ import { mapActions } from 'vuex';
         num2: 0,
         result: "",
         operator: NaN,
+        //localhost or local ip adress
+        apiUrl: "http://localhost:8080/api/calculator"
       };
     },
     methods: {
@@ -67,6 +70,30 @@ import { mapActions } from 'vuex';
             this.inputValue = this.inputValue.toString().slice(0, -1);
           }
             
+        },
+
+        calculateAPI(){
+          this.num2 = this.parseToNumber(this.inputValue);
+          if(this.operator === "divide"){
+            if(this.num2 === 0){
+              window.alert("Cannot divide by 0!");
+              this.clearInput();
+            }
+          }
+          const url = `${this.apiUrl}/${this.operator}`;
+          axios.post(url, {
+            leftOperand: this.num1,
+            rightOperand: this.num2
+          })
+          .then(response => {
+            this.result = response.data;
+            this.inputValue = this.result;
+            this.logCalculation(this.num1 + " " + this.operator + " " + this.num2 + " = " + this.result);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+          
         },
         
         calculate(){
