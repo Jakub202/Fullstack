@@ -26,7 +26,7 @@
         <button class="number" id="button9" @click="addNumber(9)">9</button>
         <button class="number" id="button0" @click="addNumber(0)">0</button>
         <button class="number" id="buttonComma" @click="addNumber('.')">.</button>
-        <button class="operator" id="buttonEquals" @click="calculateAPI()">=</button>
+        <button class="operator" id="buttonEquals" @click="calculate()">=</button>
 
     </div>
 </div>
@@ -35,7 +35,7 @@
 
 <script>
 import { mapActions } from 'vuex';
-import axios from 'axios';
+//import axios from 'axios';
     export default{
         
     data() {
@@ -98,7 +98,7 @@ import axios from 'axios';
         
         calculate(){
           this.num2 = this.parseToNumber(this.inputValue);
-          if(this.operator === "/"){
+          if(this.operator === "divide"){
             if(this.num2 === 0){
               window.alert("Cannot divide by 0!");
               this.clearInput();
@@ -107,13 +107,13 @@ import axios from 'axios';
               this.result = this.num1 / this.num2;
             }
             
-          }else if(this.operator === "*"){
+          }else if(this.operator === "multiply"){
             this.inputValue = this.num1 * this.num2;
             this.result = this.num1 * this.num2;
-          }else if(this.operator === "+"){
+          }else if(this.operator === "add"){
             this.result = this.num1 + this.num2;
             this.inputValue = this.result;
-          }else if(this.operator === "-"){
+          }else if(this.operator === "subtract"){
             this.result = this.num1 - this.num2;
             this.inputValue = this.result;
           }

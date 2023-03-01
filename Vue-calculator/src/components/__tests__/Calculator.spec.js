@@ -9,6 +9,7 @@ describe("Calculator", () => {
   
     beforeEach(() => {
       wrapper = mount(Calculator);
+      wrapper.find("#buttonAC").trigger("click");
     });
   
     it("displays numbers when they are clicked", async () => {
