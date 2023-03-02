@@ -35,6 +35,7 @@
 
 <script>
 import { mapActions } from 'vuex';
+import axios from 'axios';
     export default{
         
     data() {
@@ -44,7 +45,8 @@ import { mapActions } from 'vuex';
         num2: 0,
         result: "",
         operator: NaN,
-        apiUrl: "http://192.168.10.142:8080/api/calculator"
+        //localhost or local ip adress
+        apiUrl: "http://localhost:8080/api/calculator"
       };
     },
     methods: {
@@ -96,7 +98,7 @@ import { mapActions } from 'vuex';
         
         calculate(){
           this.num2 = this.parseToNumber(this.inputValue);
-          if(this.operator === "/"){
+          if(this.operator === "divide"){
             if(this.num2 === 0){
               window.alert("Cannot divide by 0!");
               this.clearInput();
@@ -105,13 +107,13 @@ import { mapActions } from 'vuex';
               this.result = this.num1 / this.num2;
             }
             
-          }else if(this.operator === "*"){
+          }else if(this.operator === "multiply"){
             this.inputValue = this.num1 * this.num2;
             this.result = this.num1 * this.num2;
-          }else if(this.operator === "+"){
+          }else if(this.operator === "add"){
             this.result = this.num1 + this.num2;
             this.inputValue = this.result;
-          }else if(this.operator === "-"){
+          }else if(this.operator === "subtract"){
             this.result = this.num1 - this.num2;
             this.inputValue = this.result;
           }
