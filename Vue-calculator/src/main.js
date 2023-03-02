@@ -5,24 +5,45 @@ import { createStore } from 'vuex';
 
 const store = createStore({
   state: {
-    calculations: []
+    calculations: [],
+    name: "",
+    email: ""
   },
   mutations: {
     addCalculation(state, calculation) {
       state.calculations.push(calculation);
+    },
+    setName(state, name) {
+      state.name = name;
+    },
+    setEmail(state, email) {
+      state.email = email;
     }
   },
   actions: {
     logCalculation({ commit }, calculation) {
       commit('addCalculation', calculation);
+    },
+    setName({ commit }, name) {
+      commit('setName', name);
+    },
+    setEmail({ commit }, email) {
+      commit('setEmail', email);
     }
   },
   getters: {
     getCalculations(state) {
       return state.calculations;
+    },
+    getName(state) {
+      return state.name;
+    },
+    getEmail(state) {
+      return state.email;
     }
   }
 });
+
 
 const app = createApp(App);
 

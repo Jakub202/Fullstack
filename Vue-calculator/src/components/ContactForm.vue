@@ -97,6 +97,16 @@
           message: ''
         };
         this.isValid = false;
+        this.$store.dispatch('setName', {
+            name: comment.name,
+        });
+        this.$store.dispatch('setEmail', {
+            name: comment.email,
+        });
+
+        
+        console.log(this.$store.getters.getName);
+        console.log(this.$store.getters.getEmail);
       } catch (error) {
         console.error(error);
       }
