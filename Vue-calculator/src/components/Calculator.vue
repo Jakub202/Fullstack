@@ -26,7 +26,7 @@
         <button class="number" id="button9" @click="addNumber(9)">9</button>
         <button class="number" id="button0" @click="addNumber(0)">0</button>
         <button class="number" id="buttonComma" @click="addNumber('.')">.</button>
-        <button class="operator" id="buttonEquals" @click="calculate()">=</button>
+        <button class="operator" id="buttonEquals" @click="calculateAPI()">=</button>
 
     </div>
 </div>
@@ -46,7 +46,7 @@ import axios from 'axios';
         result: "",
         operator: NaN,
         //localhost or local ip adress
-        apiUrl: "http://localhost:8080/api/calculator"
+        apiUrl: "http://192.168.10.142:8080/api/calculator"
       };
     },
     methods: {
