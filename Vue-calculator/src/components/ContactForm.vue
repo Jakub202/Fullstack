@@ -33,7 +33,7 @@
         </textarea>
         <div v-if="errors.message" class="error">{{ errors.message }}</div>
       </div>
-      <button :disabled="!isValid">Submit</button>
+      <button id="submitButton" :disabled="!isValid">Submit</button>
     </form>
   </template>
   
@@ -55,14 +55,17 @@
     },
     methods: {
       validateForm() {
-        this.errors = {
-          name: this.name ? "" : "Name is required.",
-          email: this.email ? "" : "Email is required.",
-          message: this.message ? "" : "Message is required."
-        };
-  
-        this.isValid = Object.values(this.errors).every(error => !error);
-      },
+  const emailPattern = /\S+@\S+\.\S+/;
+
+  this.errors = {
+    name: this.name ? "" : "Name is required.",
+    email: emailPattern.test(this.email) ? "" : "Email is not valid.",
+    message: this.message ? "" : "Message is required."
+  };
+
+  this.isValid = Object.values(this.errors).every(error => !error);
+},
+
       async submitComment() {
       if (!this.isValid) return;
 
@@ -94,6 +97,16 @@
           message: ''
         };
         this.isValid = false;
+        this.$store.dispatch('setName', {
+            name: comment.name,
+        });
+        this.$store.dispatch('setEmail', {
+            name: comment.email,
+        });
+
+        
+        console.log(this.$store.getters.getName);
+        console.log(this.$store.getters.getEmail);
       } catch (error) {
         console.error(error);
       }
