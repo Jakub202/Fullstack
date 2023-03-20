@@ -26,7 +26,7 @@
         <button class="number" id="button9" @click="addNumber(9)">9</button>
         <button class="number" id="button0" @click="addNumber(0)">0</button>
         <button class="number" id="buttonComma" @click="addNumber('.')">.</button>
-        <!-- change to calculate for Vitest-->
+        <!-- change to calculate() for Vitest-->
         <button class="operator" id="buttonEquals" @click="calculateAPI()">=</button>
 
     </div>
