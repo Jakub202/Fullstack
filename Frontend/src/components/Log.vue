@@ -31,7 +31,7 @@
     padding: 20px;
     margin: 20px;
   }
-  
+
   #logList {
     text-align: left;
     margin: auto;

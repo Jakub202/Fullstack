@@ -1,89 +1,48 @@
-<script setup>
-import { RouterLink, RouterView } from "vue-router";
-</script>
-
 <template>
   <header>
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="@/assets/logo.svg"
-      width="125"
-      height="125"
-    />
-
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/contact">Contact</RouterLink>
-        <Routerlink to="/calculator">Calculator</Routerlink>
-      </nav>
-    </div>
+    <nav>
+      <router-link to="/">Home</router-link>
+      <router-link to="/contact">Contact</router-link>
+      <router-link to="/Calculator">Calculator</router-link>
+    </nav>
   </header>
 
-  <RouterView />
+  <router-view />
 </template>
 
-<style scoped>
+<style>
 header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+  background-color: #333; /* Set background color */
+  color: white; /* Set text color */
+  height: 60px; /* Set height */
+  display: flex; /* Set display to flex */
+  justify-content: center; /* Center menu items horizontally */
+  align-items: center; /* Center menu items vertically */
 }
 
 nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+  display: flex; /* Set display to flex */
+  justify-content: space-around; /* Distribute menu items evenly */
+  align-items: center; /* Center menu items vertically */
+  width: 50%; /* Set width of menu */
+  height: 100%; /* Set height of menu */
+  border-left: 1px solid white; /* Add a border to the left of menu */
+  border-right: 1px solid white; /* Add a border to the right of menu */
 }
 
 nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+  text-decoration: none; /* Remove underline from links */
+  color: white; /* Set text color */
+  font-size: 1.2rem; /* Set font size */
+  padding: 0.5rem; /* Add padding */
+  border-left: 1px solid white; /* Add a border to the left of menu items */
 }
 
-nav a:first-of-type {
-  border: 0;
+nav a:first-child {
+  border-left: none; /* Remove border from first menu item */
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+nav a:last-child {
+  border-right: none; /* Remove border from last menu item */
 }
 </style>

@@ -1,9 +1,11 @@
 <template>
   <div class="home">
-    <h1>Welcome to My App</h1>
-    <div class="buttons">
-      <button @click="showLogin = true">Login</button>
-      <button @click="showRegistration = true">Register</button>
+    <div v-if="!showLogin && !showRegistration">
+      <h1>Welcome to My Calculator</h1>
+      <div class="buttons">
+        <button @click="showLogin = true">Login</button>
+        <button @click="showRegistration = true">Register</button>
+      </div>
     </div>
     <div v-if="showLogin">
       <Login @close="showLogin = false"/>

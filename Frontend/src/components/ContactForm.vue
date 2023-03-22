@@ -1,7 +1,7 @@
 
 
 <template>
-    <form @submit.prevent="submitComment">
+    <form class="contact-form" @submit.prevent="submitComment">
       <div class="form-group">
         <label for="name">Name:</label>
         <input
@@ -116,63 +116,77 @@
   </script>
   
   <style scoped>
-  .contact-form {
+    .contact-form{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
     height: 100%;
     padding: 2rem;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
+    background-color: #ffffff;
+    border: 1px solid #dcdcdc;
     border-radius: 5px;
   }
-  
-  form {
+
+  .form-group {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     max-width: 500px;
   }
-  
+
   label {
     font-weight: bold;
     margin-bottom: 0.5rem;
+    color: #666666;
   }
-  
+
   input {
     width: 100%;
     padding: 0.5rem;
     margin-bottom: 1rem;
-    border: 1px solid #ccc;
+    border: 1px solid #dcdcdc;
     border-radius: 5px;
+    color: #333333;
   }
 
-  textarea{
+  textarea {
     height: 200px;
     width: 100%;
     padding: 0.5rem;
     margin-bottom: 1rem;
-    border: 1px solid #ccc;
+    border: 1px solid #dcdcdc;
     border-radius: 5px;
+    color: #333333;
   }
-  
+
   button {
     width: 100%;
     max-width: 300px;
     padding: 0.5rem;
     background-color: #0077cc;
-    color: #fff;
+    color: #ffffff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
   }
-  
+
+  button:hover {
+    background-color: #006bbf;
+  }
+
   button:disabled {
-    background-color: #bbb;
+    background-color: #cccccc;
     cursor: not-allowed;
   }
+
+  .error {
+    color: #ff0000;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+  }
+
   </style>
   

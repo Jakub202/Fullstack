@@ -157,73 +157,104 @@ import axios from 'axios';
 
 <style scoped>
 
-    .buttons{
-    grid-column: 2/3;
-    grid-row: 3/4;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    grid-row-gap: 20px;
-    grid-column-gap: 20px;
-    font-size: 50px;
+.buttons{
+  grid-column: 2/3;
+  grid-row: 3/4;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-row-gap: 20px;
+  grid-column-gap: 20px;
+  font-size: 50px;
 }
 
 .number{
-    font-size: 50px;
+  font-size: 50px;
 }
 
 .operator {
-    font-size: 50px;
+  font-size: 50px;
+  background-color: #f2f2f2;
+  color: #333;
 }
 
 #buttonAC {
-    grid-column: 1/2;
+  grid-column: 1/2;
+  background-color: #f2f2f2;
+  color: #333;
 }
 
 #buttonMulti {
-    grid-column: 4/5;
-    grid-row: 2/3;
-    
+  grid-column: 4/5;
+  grid-row: 2/3;
+  background-color: #f2f2f2;
+  color: #333;
 }
 
 #buttonAdd {
-    grid-column: 4/5;
-    grid-row: 3/4;
+  grid-column: 4/5;
+  grid-row: 3/4;
+  background-color: #f2f2f2;
+  color: #333;
 }
 
 #buttonDiff {
-    grid-column: 4/5;
-    grid-row: 4/5;
+  grid-column: 4/5;
+  grid-row: 4/5;
+  background-color: #f2f2f2;
+  color: #333;
 }
 
 #button1{
-    grid-column: 1/2;
+  grid-column: 1/2;
 }
 
 #button4{
-    grid-column: 1/2;
+  grid-column: 1/2;
 }
 
 #button7{
-    grid-column: 1/2;
+  grid-column: 1/2;
 }
 
 #button0{
-    grid-column: 2/3;
+  grid-column: 2/3;
+  background-color: #f2f2f2;
+  color: #333;
 
 }
 
 .input{
-    grid-column: 2/3;
-    grid-row: 2/3;
-   
+  grid-column: 2/3;
+  grid-row: 2/3;
+
 }
 
 #inputBox{
-    width: 100%;
-    height: 100%;
-    font-size: 30px;
-    text-align: center;
+  width: 100%;
+  height: 100%;
+  font-size: 30px;
+  text-align: center;
+  border: 2px solid #f2f2f2;
+  border-radius: 10px;
+}
 
+#buttonEquals {
+  grid-column: 4/5;
+  grid-row: 5/6;
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+button:hover {
+  background-color: #e6e6e6;
+}
+
+.root {
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  grid-template-rows: 10% 20% 60% 10%;
+  height: 100vh;
+  background-color: #f7f7f7;
 }
 </style>
