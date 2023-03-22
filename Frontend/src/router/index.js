@@ -17,6 +17,11 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import("../views/ContactView.vue"),
     },
+    {
+      path: "/calculator",
+      name: "calculator",
+      component: () => import("../views/CalculatorView.vue"),
+    }
   ],
 });
 
