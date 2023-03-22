@@ -1,3 +1,4 @@
+
 import ContactForm from '../components/ContactForm.vue';
 
 <template>
@@ -7,7 +8,7 @@ import ContactForm from '../components/ContactForm.vue';
 </template>
 
 <script setup>
-import ContactForm from "../components/ContactForm.vue";
+import ContactForm from '../components/ContactForm.vue';
 </script>
 
 <style>
