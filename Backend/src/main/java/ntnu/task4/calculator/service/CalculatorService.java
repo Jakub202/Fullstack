@@ -4,7 +4,7 @@ package ntnu.task4.calculator.service;
 import lombok.RequiredArgsConstructor;
 import ntnu.task4.calculator.model.Equation;
 
-import ntnu.task4.calculator.repository.EquationRepository2;
+import ntnu.task4.calculator.repository.EquationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ import java.util.List;
 public class CalculatorService {
 
     @Autowired
-    private final EquationRepository2 equationRepository;
+    private final EquationRepository equationRepository;
 
 
     public Equation solve(Equation equation){
