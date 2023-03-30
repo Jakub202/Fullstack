@@ -2,10 +2,10 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 import { createStore } from 'vuex';
+import { createPinia } from "pinia";
 
 const store = createStore({
   state: {
-    calculations: [],
     name: "",
     email: ""
   },
@@ -36,10 +36,11 @@ const store = createStore({
 });
 
 
+const pinia = createPinia();
 const app = createApp(App);
 
 app.use(router);
-app.use(store);
+app.use(pinia);
 
 app.mount('#app');
 

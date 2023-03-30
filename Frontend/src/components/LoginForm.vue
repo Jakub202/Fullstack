@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <h2>Login</h2>
+    <h2>{{ commentStore.name }}</h2>
     <form>
       <label for="username">Username</label>
       <input type="text" id="username" v-model="username" />
@@ -17,6 +17,7 @@
 <script>
 import { useTokenStore } from "@/store/token";
 import router from "@/router";
+import { useCommentStore } from "@/store/commentStore";
 
 export default {
   data() {
@@ -27,7 +28,8 @@ export default {
   },
   setup() {
     const tokenStore = useTokenStore();
-    return { tokenStore };
+    const commentStore = useCommentStore();
+    return { tokenStore, commentStore };
   },
   methods: {
     close() {
