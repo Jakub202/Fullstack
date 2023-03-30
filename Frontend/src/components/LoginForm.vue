@@ -8,7 +8,7 @@
       <label for="password">Password</label>
       <input type="password" id="password" v-model="password" />
 
-      <button type="submit" @click.prevent="handleLoginClick">Submit</button>
+      <button type="submit" @click.prevent="handleLoginClick">Login</button>
       <button type="button" @click="close">Close</button>
     </form>
   </div>

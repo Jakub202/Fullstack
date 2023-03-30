@@ -2,6 +2,7 @@
   <form class="contact-form" @submit.prevent="submitComment">
     <div class="form-group">
       <label for="name">Name:</label>
+      <h2>{{ commentStore.name }}</h2>
       <input type="text" id="name" v-model="name" @input="validateForm" />
       <div v-if="errors.name" class="error">{{ errors.name }}</div>
     </div>

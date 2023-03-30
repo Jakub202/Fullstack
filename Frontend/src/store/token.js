@@ -6,7 +6,17 @@ export const useTokenStore = defineStore("token", {
     jwtToken: null,
     loggedInUser: null,
   }),
-
+  persist: {
+    enabled: true,
+    strategies: [
+      {
+        // Use sessionStorage for storing the state
+        storage: window.sessionStorage,
+        // The key to use when storing the state
+        key: 'commentStore',
+      },
+    ],
+  },
   actions: {
     async getTokenAndSaveInStore(username, password) {
       try {

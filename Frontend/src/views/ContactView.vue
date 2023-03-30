@@ -1,6 +1,4 @@
 
-import ContactForm from '../components/ContactForm.vue';
-
 <template>
   <main>
     <ContactForm />

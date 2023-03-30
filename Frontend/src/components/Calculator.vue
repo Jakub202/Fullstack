@@ -1,17 +1,37 @@
 <template>
   <div class="root">
     <div class="input">
-      <input type="text" id="inputBox" placeholder="enter number" v-model="inputValue" size="30">
+      <input
+        type="text"
+        id="inputBox"
+        placeholder="enter number"
+        v-model="inputValue"
+        size="30"
+      />
     </div>
 
     <div class="buttons">
       <button class="operator" id="buttonAC" @click="clearAll()">AC</button>
       <button class="operator" id="buttonAns" @click="getAnswer()">Ans</button>
-      <button class="operator" id="buttonDel" @click="deleteLastDigit()">Del</button>
-      <button class="operator" id="buttonDiv" @click="setOperator('divide')">/</button>
-      <button class="operator" id="buttonMulti" @click="setOperator('multiply')">*</button>
-      <button class="operator" id="buttonAdd" @click="setOperator('add')">+</button>
-      <button class="operator" id="buttonDiff" @click="setOperator('subtract')">-</button>
+      <button class="operator" id="buttonDel" @click="deleteLastDigit()">
+        Del
+      </button>
+      <button class="operator" id="buttonDiv" @click="setOperator('divide')">
+        /
+      </button>
+      <button
+        class="operator"
+        id="buttonMulti"
+        @click="setOperator('multiply')"
+      >
+        *
+      </button>
+      <button class="operator" id="buttonAdd" @click="setOperator('add')">
+        +
+      </button>
+      <button class="operator" id="buttonDiff" @click="setOperator('subtract')">
+        -
+      </button>
       <button class="number" id="button1" @click="addNumber(1)">1</button>
       <button class="number" id="button2" @click="addNumber(2)">2</button>
       <button class="number" id="button3" @click="addNumber(3)">3</button>
@@ -24,7 +44,9 @@
       <button class="number" id="button0" @click="addNumber(0)">0</button>
       <button class="number" id="buttonComma" @click="addNumber('.')">.</button>
       <!-- change to calculate() for Vitest-->
-      <button class="operator" id="buttonEquals" @click="calculateAPI()">=</button>
+      <button class="operator" id="buttonEquals" @click="calculateAPI()">
+        =
+      </button>
     </div>
 
     <div class="historyBox">
@@ -39,152 +61,162 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-import axios from 'axios';
-    export default{
-
-    data() {
-      return {
-        inputValue: "",
-        num1: 0,
-        num2: 0,
-        result: "",
-        operator: NaN,
-        history: [],
-        //localhost or local ip adress
-        apiUrl: "http://localhost:8080/api/calculator"
-      };
+import {useTokenStore} from "@/store/token";
+import axios from "axios";
+export default {
+  setup(){
+    const tokenStore = useTokenStore();
+    return tokenStore;
+  },
+  data() {
+    return {
+      inputValue: "",
+      num1: 0,
+      num2: 0,
+      result: "",
+      operator: NaN,
+      history: [],
+      //localhost or local ip adress
+      apiUrl: "http://localhost:8080/api/calculator",
+    };
+  },
+  methods: {
+    clearInput() {
+      this.inputValue = "";
     },
-    methods: {
-        clearInput(){
-          this.inputValue ="";
-        },
 
-        ...mapActions(['logCalculation']),
+    clearAll() {
+      this.inputValue = "";
+      this.num1 = "";
+      this.num2 = "";
+      this.result = "";
+    },
 
-        clearAll(){
-          this.inputValue ="";
-          this.num1 = "";
-          this.num2 = "";
-          this.result = "";
-        },
+    deleteLastDigit() {
+      if (/[^0-9.]/.test(this.inputValue.toString())) {
+        this.inputValue = "";
+      } else {
+        this.inputValue = this.inputValue.toString().slice(0, -1);
+      }
+    },
 
-        deleteLastDigit(){
-          if (/[^0-9.]/.test(this.inputValue.toString())) {
-            this.inputValue = "";
-          }else{
-            this.inputValue = this.inputValue.toString().slice(0, -1);
-          }
-
-        },
-
-        calculateAPI(){
-          this.num2 = this.parseToNumber(this.inputValue);
-          if(this.operator === "divide"){
-            if(this.num2 === 0){
-              window.alert("Cannot divide by 0!");
-              this.clearInput();
-            }
-          }
-          const url = `${this.apiUrl}/solve`;
-          axios.post(url, {
-            leftOperand: this.num1,
-            rightOperand: this.num2,
-            operator: this.operator
-          })
-          .then(response => {
-            this.result = response.data;
-            this.inputValue = this.result;
-            this.history.push(this.num1 + " " + this.getOperatorSymbol(this.operator) + " " + this.num2 + " = " + this.result);
-          })
-          .catch(error => {
-            console.error(error);
-          });
-
-        },
-
-        calculate(){
-          this.num2 = this.parseToNumber(this.inputValue);
-          if(this.operator === "divide"){
-            if(this.num2 === 0){
-              window.alert("Cannot divide by 0!");
-              this.clearInput();
-            }else{
-              this.inputValue = this.num1 / this.num2;
-              this.result = this.num1 / this.num2;
-            }
-
-          }else if(this.operator === "multiply"){
-            this.inputValue = this.num1 * this.num2;
-            this.result = this.num1 * this.num2;
-          }else if(this.operator === "add"){
-            this.result = this.num1 + this.num2;
-            this.inputValue = this.result;
-          }else if(this.operator === "subtract"){
-            this.result = this.num1 - this.num2;
-            this.inputValue = this.result;
-          }
-          this.history(this.num1 + " " + this.operator + " " + this.num2 + " = " + this.result);
-        },
-
-        addNumber(number){
-          this.inputValue += number.toString();
-        },
-
-        setOperator(str){
-          if(this.inputValue !== ""){
-            this.operator = str;
-            this.num1 = this.parseToNumber(this.inputValue);
-            this.clearInput();
-          }else{
-            window.alert("Empty input!")
-          }
-        },
-
-        parseToNumber(str){
-          if (/[^0-9.]/.test(str)) {
-            window.alert("Please only use digits and a period")
-          }else{
-            return parseFloat(str);
-          }
-        },
-
-        getAnswer(){
-          if(this.result !== ""){
-            this.inputValue = this.result.toString();
-          }
-        },
-      getOperatorSymbol(operator) {
-        switch (operator) {
-          case "add":
-            return "+";
-          case "subtract":
-            return "-";
-          case "multiply":
-            return "*";
-          case "divide":
-            return "/";
-          default:
-            return "";
+    calculateAPI() {
+      this.num2 = this.parseToNumber(this.inputValue);
+      if (this.operator === "divide") {
+        if (this.num2 === 0) {
+          window.alert("Cannot divide by 0!");
+          this.clearInput();
         }
       }
-
-
+      const url = `${this.apiUrl}/solve`;
+      axios
+        .post(url, {
+          leftOperand: this.num1,
+          rightOperand: this.num2,
+          operator: this.operator,
+        })
+        .then((response) => {
+          this.result = response.data;
+          this.inputValue = this.result;
+          this.history.push(
+            this.num1 +
+              " " +
+              this.getOperatorSymbol(this.operator) +
+              " " +
+              this.num2 +
+              " = " +
+              this.result
+          );
+        })
+        .catch((error) => {
+          console.error(error);
+          this.calculate();
+        });
     },
-      mounted() {
-        const userId = 1; // replace with the actual user ID
-        axios.get(`${this.apiUrl}/history?userId=${userId}`)
-            .then(response => {
-              this.history = response.data.map(equation => {
-                return `${equation.leftOperand} ${this.getOperatorSymbol(equation.operator)} ${equation.rightOperand} = ${equation.result}`;
-              });
-            })
-            .catch(error => {
-              console.log(error)
-            })
-      }
 
-    }
+    calculate() {
+      this.num2 = this.parseToNumber(this.inputValue);
+      if (this.operator === "divide") {
+        if (this.num2 === 0) {
+          window.alert("Cannot divide by 0!");
+          this.clearInput();
+        } else {
+          this.inputValue = this.num1 / this.num2;
+          this.result = this.num1 / this.num2;
+        }
+      } else if (this.operator === "multiply") {
+        this.inputValue = this.num1 * this.num2;
+        this.result = this.num1 * this.num2;
+      } else if (this.operator === "add") {
+        this.result = this.num1 + this.num2;
+        this.inputValue = this.result;
+      } else if (this.operator === "subtract") {
+        this.result = this.num1 - this.num2;
+        this.inputValue = this.result;
+      }
+      this.history.push(
+        this.num1 + " " + this.operator + " " + this.num2 + " = " + this.result
+      );
+    },
+
+    addNumber(number) {
+      this.inputValue += number.toString();
+    },
+
+    setOperator(str) {
+      if (this.inputValue !== "") {
+        this.operator = str;
+        this.num1 = this.parseToNumber(this.inputValue);
+        this.clearInput();
+      } else {
+        window.alert("Empty input!");
+      }
+    },
+
+    parseToNumber(str) {
+      if (/[^0-9.]/.test(str)) {
+        window.alert("Please only use digits and a period");
+      } else {
+        return parseFloat(str);
+      }
+    },
+
+    getAnswer() {
+      if (this.result !== "") {
+        this.inputValue = this.result.toString();
+      }
+    },
+    getOperatorSymbol(operator) {
+      switch (operator) {
+        case "add":
+          return "+";
+        case "subtract":
+          return "-";
+        case "multiply":
+          return "*";
+        case "divide":
+          return "/";
+        default:
+          return "";
+      }
+    },
+  },
+  mounted() {
+    // replace with the actual user ID
+    axios
+      .get(`${this.apiUrl}/history?userName=john.doe`)
+      .then((response) => {
+        this.history = response.data.map((equation) => {
+          return `${equation.leftOperand} ${this.getOperatorSymbol(
+            equation.operator
+          )} ${equation.rightOperand} = ${equation.result}`;
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+};
 </script>
 
 <style scoped>
@@ -196,13 +228,13 @@ import axios from 'axios';
   background-color: #f7f7f7;
 }
 
-.input{
+.input {
   grid-column: 2/3;
   grid-row: 2/3;
   padding-bottom: 15px;
 }
 
-#inputBox{
+#inputBox {
   width: 100%;
   height: 100%;
   font-size: 30px;
@@ -211,7 +243,7 @@ import axios from 'axios';
   border-radius: 10px;
 }
 
-.buttons{
+.buttons {
   grid-column: 2/3;
   grid-row: 3/4;
   display: grid;
@@ -222,7 +254,7 @@ import axios from 'axios';
   font-size: 50px;
 }
 
-.number{
+.number {
   font-size: 50px;
 }
 
@@ -259,19 +291,19 @@ import axios from 'axios';
   color: #333;
 }
 
-#button1{
+#button1 {
   grid-column: 1/2;
 }
 
-#button4{
+#button4 {
   grid-column: 1/2;
 }
 
-#button7{
+#button7 {
   grid-column: 1/2;
 }
 
-#button0{
+#button0 {
   grid-column: 2/3;
   background-color: #f2f2f2;
   color: #333;
@@ -307,5 +339,4 @@ button:hover {
   font-size: 16px;
   margin-bottom: 5px;
 }
-
 </style>

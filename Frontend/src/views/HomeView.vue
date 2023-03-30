@@ -2,6 +2,7 @@
   <div class="home">
     <div v-if="!showLogin && !showRegistration">
       <h1>Welcome to My Calculator</h1>
+      <h2>{{ commentStore.name }}</h2>
       <div class="buttons">
         <button @click="showLogin = true">Login</button>
         <button @click="showRegistration = true">Register</button>
@@ -19,6 +20,7 @@
 <script>
 import Login from '@/components/LoginForm.vue';
 import Registration from '@/components/RegistrationForm.vue';
+import {useCommentStore} from "@/store/commentStore";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -32,6 +34,10 @@ export default {
       showLogin: false,
       showRegistration: false
     }
+  },
+  setup() {
+    const commentStore = useCommentStore()
+    return { commentStore }
   }
 }
 </script>

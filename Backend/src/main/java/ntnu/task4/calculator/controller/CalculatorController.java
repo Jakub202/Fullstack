@@ -2,6 +2,7 @@ package ntnu.task4.calculator.controller;
 
 import ntnu.task4.calculator.model.Equation;
 import ntnu.task4.calculator.service.CalculatorService;
+import ntnu.task4.calculator.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +18,12 @@ public class CalculatorController {
 
     @Autowired
     private CalculatorService calculatorService;
+    @Autowired
+    private UserService userService;
 
     private static final Logger logger = LoggerFactory.getLogger(CalculatorController.class);
+
+    //TODO: add token auth
     @PostMapping("/solve")
     public ResponseEntity<Double> calculate(@RequestBody Equation equation) {
         try{
@@ -34,9 +39,11 @@ public class CalculatorController {
 
 
     @GetMapping("/history")
-    public ResponseEntity<List<Equation>> getHistory(){
+    public ResponseEntity<List<Equation>> getHistory(@RequestParam("userName") String userName){
 
-        return ResponseEntity.ok().body(calculatorService.getEquationsByUserId(1L));
+        long id = userService.getUserIdByName(userName);
+
+        return ResponseEntity.ok().body(calculatorService.getEquationsByUserId(id));
 
     }
 
