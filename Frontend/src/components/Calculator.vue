@@ -42,7 +42,7 @@
 import { mapActions } from 'vuex';
 import axios from 'axios';
     export default{
-        
+
     data() {
       return {
         inputValue: "",
@@ -75,7 +75,7 @@ import axios from 'axios';
           }else{
             this.inputValue = this.inputValue.toString().slice(0, -1);
           }
-            
+
         },
 
         calculateAPI(){
@@ -100,9 +100,9 @@ import axios from 'axios';
           .catch(error => {
             console.error(error);
           });
-          
+
         },
-        
+
         calculate(){
           this.num2 = this.parseToNumber(this.inputValue);
           if(this.operator === "divide"){
@@ -113,7 +113,7 @@ import axios from 'axios';
               this.inputValue = this.num1 / this.num2;
               this.result = this.num1 / this.num2;
             }
-            
+
           }else if(this.operator === "multiply"){
             this.inputValue = this.num1 * this.num2;
             this.result = this.num1 * this.num2;
@@ -124,9 +124,7 @@ import axios from 'axios';
             this.result = this.num1 - this.num2;
             this.inputValue = this.result;
           }
-          this.logCalculation(this.num1 + " " + this.operator + " " + this.num2 + " = " + this.result);
-          
-          
+          this.history(this.num1 + " " + this.operator + " " + this.num2 + " = " + this.result);
         },
 
         addNumber(number){

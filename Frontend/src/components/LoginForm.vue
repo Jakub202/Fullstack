@@ -3,35 +3,49 @@
     <h2>Login</h2>
     <form>
       <label for="username">Username</label>
-      <input type="text" id="username" v-model="username">
+      <input type="text" id="username" v-model="username" />
 
       <label for="password">Password</label>
-      <input type="password" id="password" v-model="password">
+      <input type="password" id="password" v-model="password" />
 
-      <button type="submit" @click.prevent="login">Submit</button>
+      <button type="submit" @click.prevent="handleLoginClick">Submit</button>
       <button type="button" @click="close">Close</button>
     </form>
   </div>
 </template>
 
 <script>
+import { useTokenStore } from "@/store/token";
+import router from "@/router";
+
 export default {
-  name: 'Login',
   data() {
     return {
-      username: '',
-      password: ''
-    }
+      username: "",
+      password: "",
+    };
+  },
+  setup() {
+    const tokenStore = useTokenStore();
+    return { tokenStore };
   },
   methods: {
-    login() {
-      // Implement login functionality here
-    },
     close() {
-      this.$emit('close');
-    }
-  }
-}
+      this.$emit("close");
+    },
+    async handleLoginClick() {
+      await this.tokenStore.getTokenAndSaveInStore(
+        this.username,
+        this.password
+      );
+      if (this.tokenStore.jwtToken) {
+        await router.push("/home");
+      } else {
+        this.loginStatus = "Login failed!";
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>

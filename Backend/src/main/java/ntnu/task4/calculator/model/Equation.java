@@ -67,8 +67,6 @@ public class Equation {
         return this.userID;
     }
 
-
-
 }
 
 

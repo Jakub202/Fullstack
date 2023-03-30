@@ -10,9 +10,6 @@ const store = createStore({
     email: ""
   },
   mutations: {
-    addCalculation(state, calculation) {
-      state.calculations.push(calculation);
-    },
     setName(state, name) {
       state.name = name;
     },
@@ -21,9 +18,6 @@ const store = createStore({
     }
   },
   actions: {
-    logCalculation({ commit }, calculation) {
-      commit('addCalculation', calculation);
-    },
     setName({ commit }, name) {
       commit('setName', name);
     },
@@ -32,9 +26,6 @@ const store = createStore({
     }
   },
   getters: {
-    getCalculations(state) {
-      return state.calculations;
-    },
     getName(state) {
       return state.name;
     },

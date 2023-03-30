@@ -22,7 +22,7 @@ public class CalculatorController {
     @PostMapping("/solve")
     public ResponseEntity<Double> calculate(@RequestBody Equation equation) {
         try{
-        Equation calculated = calculatorService.solve(equation);
+        calculatorService.solve(equation);
         }catch (Error e){
             logger.error("Could not resolve equation");
             return ResponseEntity.badRequest().build();
